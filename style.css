@@ -322,6 +322,7 @@ option {
 .submit-button:disabled {
   color: #aaaaaa;
   background-color: #ededed;
+  pointer-events: none;
 }
 
 .submit-button:hover {

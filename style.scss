@@ -249,6 +249,7 @@ option {
   &:disabled {
     color: #aaaaaa;
     background-color: #ededed;
+    pointer-events: none;
   }
 
   &:hover {
