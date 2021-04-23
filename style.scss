@@ -1,3 +1,6 @@
+$base-background: #296efa;
+$signup-section-background: #f9f9f9;
+
 * {
   margin: 0;
   padding: 0;
@@ -12,28 +15,31 @@ body {
 }
 
 main {
-  background: purple;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 1024px;
   height: 100%;
   text-align: center;
+  background: $base-background;
 }
 
 body {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
-  overflow-y: scroll;
 }
 
-.signin {
-  background-color: #f9f9f9;
+.signup {
+  min-height: 1000px;
+  background-color: $signup-section-background;
+  flex-wrap: nowrap;
   display: flex;
   height: 100%;
   width: 94.5%;
 }
 
 .section-header {
+  min-width: fit-content;
   width: 100%;
   font-size: 31px;
 }
@@ -44,6 +50,8 @@ body {
 
 select {
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 select:required:invalid {
@@ -54,36 +62,37 @@ option {
   color: #343434;
 }
 
-.sigin-section {
+.sigup-section {
   display: flex;
   color: #343434;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 85%;
+  min-width: fit-content;
+  height: 100%;
   width: 65%;
 }
 
-.signin-input-container {
+.steps {
+  display: flex;
+  padding-right: 2em;
+  font-weight: bold;
+  font-size: 13px;
+  height: 10%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.signup-input-container {
   display: flex;
   flex-direction: column;
   text-align: left;
   align-items: center;
+  min-height: fit-content;
   width: 100%;
   justify-content: center;
   height: 100%;
-}
-
-.steps {
-  // background-color: red;
-  display: flex;
-  padding-right: 2em;
-  font-weight: bold;
-  font-size: 14px;
-  height: 15%;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .steps-icons {
@@ -94,22 +103,25 @@ option {
   font-size: 4px;
   justify-content: space-between;
   align-items: center;
-  // background-color: yellow;
 }
 
 .current-step-icon {
   color: black;
 }
 
-.signin-form-container {
+.no-pointer-events {
+  pointer-events: none !important;
+}
+
+.signup-form-container {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
-  width: 40%;
+  width: 42%;
 }
 
-.signin-form {
+.signup-form {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -130,26 +142,26 @@ option {
 }
 
 .input-field-error {
-  text-shadow: 0px -2px 2px rgba(255, 70, 24, 0.2) !important;
-  box-shadow: 0 0 0 2px rgba(255, 70, 24, 0.2) !important;
-  color: red !important;
-  border-color: red !important;
+  text-shadow: 0px -2px 2px rgba(253, 72, 72, 0.5) !important;
+  box-shadow: 0 0 0 2px rgba(253, 72, 72, 0.5) !important;
+  color: rgb(253, 72, 72) !important;
+  border-color: rgb(253, 72, 72) !important;
   &[data-footer]::before {
-    color: red !important;
+    color: rgb(253, 72, 72) !important;
   }
 }
 
-.signin-input-field-container {
+.signup-input-field-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 17px;
   margin-bottom: 2rem;
   width: 100%;
-  border: 1px solid #d9d9d9;
+  font-size: 17px;
+  border: 1px solid rgba(#d9d9d9, 0.3);
   border-radius: 4px;
-  background-color: #f9f9f9;
+  background-color: $signup-section-background;
   color: gray;
   transition: all 0.3s;
   &:hover {
@@ -171,11 +183,11 @@ option {
     bottom: -25px;
     left: 0px;
     color: gray;
+    text-shadow: none !important;
   }
 
   &[data-header]::after {
     opacity: 0;
-    // visibility: none;
     transition: all 0.3s;
     content: attr(data-header);
     position: absolute;
@@ -183,20 +195,19 @@ option {
     top: -10px;
     left: 16px;
     pointer-events: none;
-    box-shadow: 0px 0px 4px 4px #f9f9f9;
-    background-color: #f9f9f9;
+    box-shadow: 0px 0px 4px 4px $signup-section-background;
+    background-color: $signup-section-background;
   }
 }
 
-.signin-input-field {
+.signup-input-field {
   width: 100%;
   font-size: 16px;
   outline: none;
   border: none;
-  background-color: #f9f9f9;
+  background-color: $signup-section-background;
   border-radius: 4px;
   padding: 1em;
-  height: 3rem;
 }
 
 .input-place-holder {
@@ -204,13 +215,20 @@ option {
 }
 
 .input-icon {
+  border: none;
+  outline: none;
   position: absolute;
   cursor: pointer;
   transition: all 0.3s;
   color: black;
   right: 20px;
+  text-shadow: none !important;
   &:hover {
     color: rgba(0, 0, 0, 0.45);
+  }
+
+  &:active {
+    opacity: 0.5;
   }
 }
 
@@ -220,8 +238,8 @@ option {
   top: -10px;
   left: 16px;
   pointer-events: none;
-  box-shadow: 0px 0px 4px 4px #f9f9f9;
-  background-color: #f9f9f9;
+  box-shadow: 0px 0px 4px 4px $signup-section-background;
+  background-color: $signup-section-background;
 }
 
 .input-footer {
@@ -241,8 +259,7 @@ option {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.025);
   background-color: #296efa;
   border-color: #296efa;
-  color: #f9f9f9;
-  // text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  color: $signup-section-background;
   transition: all 0.5s;
   margin-top: 2rem;
   height: 3rem;
@@ -265,6 +282,10 @@ option {
   width: 100%;
 }
 
+.policy-info {
+  font-size: 13px;
+}
+
 .redirect-link {
   font-weight: bold;
   cursor: pointer;
@@ -277,17 +298,20 @@ option {
 
 .info-section {
   background: #296efa;
-  color: #f9f9f9;
+  color: $signup-section-background;
   display: flex;
+  min-width: fit-content;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   height: 100%;
   width: 35%;
 }
 
 .info {
-  padding: 5rem 9rem 17rem 9rem;
+  margin: 0rem 5rem;
+  padding: 5rem 0rem;
   font-size: 19px;
+  width: 18em;
   line-height: 1.5em;
   text-align: left;
 }

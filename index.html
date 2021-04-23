@@ -20,8 +20,8 @@
   </head>
   <body>
     <main>
-      <div class="signin">
-        <section class="sigin-section">
+      <div class="signup">
+        <section class="sigup-section">
           <div class="steps">
             Step 1 of 3
             <div class="steps-icons">
@@ -30,40 +30,40 @@
               <i class="bi bi-circle-fill"></i>
             </div>
           </div>
-          <div class="signin-input-container">
-            <div class="signin-form-container">
+          <div class="signup-input-container">
+            <div class="signup-form-container">
               <h1 class="section-header">Let's set up your account</h1>
               <span class="redirect-info"
                 ><p>
                   Already have an account ? <a class="redirect-link">Sign in</a>
                 </p>
               </span>
-              <form class="signin-form">
+              <form class="signup-form">
                 <div
-                  class="signin-input-field-container"
+                  class="signup-input-field-container"
                   data-header="Your name"
                 >
                   <input
                     type="text"
                     placeholder="Your name"
-                    class="signin-input-field"
+                    class="signup-input-field"
                     required
                   />
                 </div>
                 <div
-                  class="signin-input-field-container"
+                  class="signup-input-field-container"
                   data-header="Email address"
                 >
                   <input
                     type="text"
                     name="email"
                     placeholder="Email address"
-                    class="signin-input-field"
+                    class="signup-input-field"
                     required
                   />
                 </div>
-                <div class="signin-input-field-container">
-                  <select required class="signin-input-field">
+                <div class="signup-input-field-container">
+                  <select required class="signup-input-field">
                     <option
                       value=""
                       class="input-place-holder"
@@ -72,28 +72,37 @@
                     >
                       I would describe my user type as
                     </option>
-                    <option value="test1">test1</option>
-                    <option value="test2">test2</option>
+                    <option value="developer">Developer</option>
+                    <option value="tester">Tester</option>
+                    <option value="manager">Manager</option>
+                    <option value="hr">Human Resource</option>
                   </select>
-                  <i class="bi bi-chevron-down input-icon"></i>
+                  <i
+                    class="bi bi-chevron-down input-icon no-pointer-events"
+                  ></i>
                 </div>
                 <div
-                  class="signin-input-field-container show-input-field-footer"
+                  class="signup-input-field-container show-input-field-footer"
+                  id="password-input-container"
                   data-footer="Minimum 8 characters"
                   data-header="Password"
                 >
                   <input
                     type="password"
+                    name="password"
+                    id="pass"
                     placeholder="Password"
-                    class="signin-input-field"
+                    class="signup-input-field"
                   />
-                  <i class="bi bi-eye-fill input-icon"></i>
+                  <div id="pass-clicable-icon" class="input-icon">
+                    <i class="bi bi-eye-slash-fill"></i>
+                  </div>
                 </div>
                 <button id="form-submit-btn" class="submit-button" disabled>
                   Next
                 </button>
               </form>
-              <p class="redirect-info">
+              <p class="redirect-info policy-info">
                 By clicking the "Next" button, you agree to creating a free
                 account, and to
                 <a class="redirect-link">Terms of Service</a> and

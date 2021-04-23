@@ -12,7 +12,6 @@ body {
 }
 
 main {
-  background: purple;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -22,18 +21,22 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  min-height: 1024px;
   height: 100%;
   text-align: center;
+  background: #296efa;
 }
 
 body {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
-  overflow-y: scroll;
 }
 
-.signin {
+.signup {
+  min-height: 1000px;
   background-color: #f9f9f9;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -42,6 +45,9 @@ body {
 }
 
 .section-header {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
   width: 100%;
   font-size: 31px;
 }
@@ -51,9 +57,9 @@ body {
 }
 
 select {
+  appearance: none;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
 }
 
 select:required:invalid {
@@ -64,7 +70,7 @@ option {
   color: #343434;
 }
 
-.sigin-section {
+.sigup-section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -79,11 +85,31 @@ option {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 85%;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  height: 100%;
   width: 65%;
 }
 
-.signin-input-container {
+.steps {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 2em;
+  font-weight: bold;
+  font-size: 13px;
+  height: 10%;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.signup-input-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -95,28 +121,14 @@ option {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
   width: 100%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   height: 100%;
-}
-
-.steps {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-right: 2em;
-  font-weight: bold;
-  font-size: 14px;
-  height: 15%;
-  width: 100%;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
 }
 
 .steps-icons {
@@ -139,7 +151,11 @@ option {
   color: black;
 }
 
-.signin-form-container {
+.no-pointer-events {
+  pointer-events: none !important;
+}
+
+.signup-form-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -153,10 +169,10 @@ option {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 40%;
+  width: 42%;
 }
 
-.signin-form {
+.signup-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -182,18 +198,18 @@ option {
 }
 
 .input-field-error {
-  text-shadow: 0px -2px 2px rgba(255, 70, 24, 0.2) !important;
-  -webkit-box-shadow: 0 0 0 2px rgba(255, 70, 24, 0.2) !important;
-          box-shadow: 0 0 0 2px rgba(255, 70, 24, 0.2) !important;
-  color: red !important;
-  border-color: red !important;
+  text-shadow: 0px -2px 2px rgba(253, 72, 72, 0.5) !important;
+  -webkit-box-shadow: 0 0 0 2px rgba(253, 72, 72, 0.5) !important;
+          box-shadow: 0 0 0 2px rgba(253, 72, 72, 0.5) !important;
+  color: #fd4848 !important;
+  border-color: #fd4848 !important;
 }
 
 .input-field-error[data-footer]::before {
-  color: red !important;
+  color: #fd4848 !important;
 }
 
-.signin-input-field-container {
+.signup-input-field-container {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -204,10 +220,10 @@ option {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-size: 17px;
   margin-bottom: 2rem;
   width: 100%;
-  border: 1px solid #d9d9d9;
+  font-size: 17px;
+  border: 1px solid rgba(217, 217, 217, 0.3);
   border-radius: 4px;
   background-color: #f9f9f9;
   color: gray;
@@ -215,12 +231,12 @@ option {
   transition: all 0.3s;
 }
 
-.signin-input-field-container:hover {
+.signup-input-field-container:hover {
   border-color: #40a9ff;
   color: #40a9ff;
 }
 
-.signin-input-field-container:focus-within {
+.signup-input-field-container:focus-within {
   border-color: #40a9ff;
   color: #40a9ff;
   text-shadow: 0px -2px 2px rgba(24, 144, 255, 0.2);
@@ -228,7 +244,7 @@ option {
           box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
 
-.signin-input-field-container[data-footer]::before {
+.signup-input-field-container[data-footer]::before {
   opacity: 0;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -238,9 +254,10 @@ option {
   bottom: -25px;
   left: 0px;
   color: gray;
+  text-shadow: none !important;
 }
 
-.signin-input-field-container[data-header]::after {
+.signup-input-field-container[data-header]::after {
   opacity: 0;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -255,7 +272,7 @@ option {
   background-color: #f9f9f9;
 }
 
-.signin-input-field {
+.signup-input-field {
   width: 100%;
   font-size: 16px;
   outline: none;
@@ -263,7 +280,6 @@ option {
   background-color: #f9f9f9;
   border-radius: 4px;
   padding: 1em;
-  height: 3rem;
 }
 
 .input-place-holder {
@@ -271,16 +287,23 @@ option {
 }
 
 .input-icon {
+  border: none;
+  outline: none;
   position: absolute;
   cursor: pointer;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   color: black;
   right: 20px;
+  text-shadow: none !important;
 }
 
 .input-icon:hover {
   color: rgba(0, 0, 0, 0.45);
+}
+
+.input-icon:active {
+  opacity: 0.5;
 }
 
 .input-header {
@@ -337,6 +360,10 @@ option {
   width: 100%;
 }
 
+.policy-info {
+  font-size: 13px;
+}
+
 .redirect-link {
   font-weight: bold;
   cursor: pointer;
@@ -355,19 +382,24 @@ option {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
   width: 35%;
 }
 
 .info {
-  padding: 5rem 9rem 17rem 9rem;
+  margin: 0rem 5rem;
+  padding: 5rem 0rem;
   font-size: 19px;
+  width: 18em;
   line-height: 1.5em;
   text-align: left;
 }

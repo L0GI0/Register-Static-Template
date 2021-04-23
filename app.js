@@ -13,121 +13,118 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-const signInForm = document.querySelector(".signin-form");
+const signUpForm = document.querySelector(".signup-form");
+const submitButton = document.getElementById("form-submit-btn");
+const passwordInput = document.getElementById("pass");
+const passwordInputIcon = document.getElementById("pass-clicable-icon");
 
-signInForm.addEventListener(
-  "keyup",
-  debounce((event) => {
-    let canSubmit = true;
-    signInForm.childNodes.forEach((child) => {
-      if (child.nodeName == "DIV") {
-        child.childNodes.forEach((inputNode) => {
-          if (inputNode.nodeName === "INPUT") {
-            const listener = () => {
-              inputNode.removeAttribute("data-footer");
-              inputNode.removeEventListener("transitionend", listener);
-            };
-            const observer = new MutationObserver((mutations) => {
-              mutations.forEach((mutation) => {
-                if (mutation.attributeName === "data-footer") {
-                  if (child.hasAttribute("data-footer")) {
-                    setTimeout(() => {
-                      child.removeEventListener("transitionend", listener);
-                      child.classList.add("show-input-field-footer");
-                      child.classList.add("input-field-error");
-                    }, 300);
-                  }
-                }
-              });
-            });
-            observer.observe(child, { attributes: true });
+const validateForm = () => {
+  let canSubmit = true;
+  signUpForm.childNodes.forEach((child) => {
+    if (child.nodeName == "DIV") {
+      child.childNodes.forEach((inputNode) => {
+        if (inputNode.nodeName === "INPUT") {
+          const listener = () => {
+            inputNode.removeAttribute("data-footer");
+            inputNode.removeEventListener("transitionend", listener);
+          };
 
-            if (inputNode.value !== "") {
-              child.classList.add("show-input-field-header");
-              if (inputNode.getAttribute("name") == "email") {
-                if (!validateEmail(child.value)) {
-                  child.setAttribute(
-                    "data-footer",
-                    "Please enter a valid email address"
-                  );
-                } else {
-                  child.addEventListener("transitionend", listener);
-                  child.classList.remove("show-input-field-footer");
-                  child.classList.remove("input-field-error");
+          const removeWarning = () => {
+            child.addEventListener("transitionend", listener);
+            child.classList.remove("show-input-field-footer");
+            child.classList.remove("input-field-error");
+          };
+
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.attributeName === "data-footer") {
+                if (child.hasAttribute("data-footer")) {
+                  setTimeout(() => {
+                    child.removeEventListener("transitionend", listener);
+                    child.classList.add("show-input-field-footer");
+                    child.classList.add("input-field-error");
+                  }, 50);
                 }
               }
-            } else {
-              canSubmit = false;
-              child.classList.remove("show-input-field-header");
+            });
+          });
+          observer.observe(child, { attributes: true });
+          if (inputNode.value !== "") {
+            child.classList.add("show-input-field-header");
+            if (inputNode.getAttribute("name") == "email") {
+              if (!validateEmail(inputNode.value)) {
+                child.setAttribute(
+                  "data-footer",
+                  "Please enter a valid email address"
+                );
+                canSubmit = false;
+              } else {
+                removeWarning();
+              }
+            } else if (inputNode.getAttribute("name") === "password") {
+              if (inputNode.value.length < 8) {
+                child.setAttribute(
+                  "data-footer",
+                  "Please enter at least 8 characters"
+                );
+                canSubmit = false;
+              } else {
+                removeWarning();
+              }
             }
+          } else {
+            canSubmit = false;
+            child.classList.remove("show-input-field-header");
           }
-        });
-      }
-    });
-    if (canSubmit) {
-      document.getElementById("form-submit-btn").disabled = false;
-    } else {
-      document.getElementById("form-submit-btn").disabled = true;
+        }
+        if (inputNode.nodeName === "SELECT" && inputNode.selectedIndex <= 0) {
+          canSubmit = false;
+        }
+      });
     }
+  });
+  if (canSubmit) {
+    document.getElementById("form-submit-btn").disabled = false;
+  } else {
+    document.getElementById("form-submit-btn").disabled = true;
+  }
+  return canSubmit;
+};
+
+window.onload = validateForm;
+
+signUpForm.addEventListener(
+  "keyup",
+  debounce(() => {
+    validateForm();
+  }, 350)
+);
+
+signUpForm.addEventListener(
+  "click",
+  debounce(() => {
+    validateForm();
   }, 200)
 );
 
-// document
-//   .querySelectorAll(".signin-input-field-container input")
-//   .forEach((inputElement) => {
-//     const listener = () => {
-//       inputElement.parentElement.removeAttribute("data-footer");
-//       inputElement.parentElement.removeEventListener("transitionend", listener);
-//     };
-//     const observer = new MutationObserver((mutations) => {
-//       mutations.forEach((mutation) => {
-//         if (mutation.attributeName === "data-footer") {
-//           if (inputElement.parentElement.hasAttribute("data-footer")) {
-//             setTimeout(() => {
-//               inputElement.parentElement.removeEventListener(
-//                 "transitionend",
-//                 listener
-//               );
-//               inputElement.parentElement.classList.add(
-//                 "show-input-field-footer"
-//               );
-//               inputElement.parentElement.classList.add("input-field-error");
-//             }, 300);
-//           }
-//         }
-//       });
-//     });
-//     observer.observe(inputElement.parentElement, { attributes: true });
-//     inputElement.addEventListener(
-//       "input",
-//       debounce((event) => {
-//         if (event.target.value !== "") {
-//           inputElement.parentElement.classList.add("show-input-field-header");
-//           if (inputElement.getAttribute("name") == "email") {
-//             console.log("email attribute");
-//             if (!validateEmail(event.target.value)) {
-//               inputElement.parentElement.setAttribute(
-//                 "data-footer",
-//                 "Please enter a valid email address"
-//               );
-//             } else {
-//               console.log("hide");
-//               inputElement.parentElement.addEventListener(
-//                 "transitionend",
-//                 listener
-//               );
-//               inputElement.parentElement.classList.remove(
-//                 "show-input-field-footer"
-//               );
-//               inputElement.parentElement.classList.remove("input-field-error");
-//             }
-//           }
-//         } else {
-//           console.log(`${inputElement.parentElement.className} is empty`);
-//           inputElement.parentElement.classList.remove(
-//             "show-input-field-header"
-//           );
-//         }
-//       }, 500)
-//     );
-//   });
+passwordInputIcon.addEventListener("click", () => {
+  passwordInputIcon.children[0].classList.toggle("bi-eye-slash-fill");
+  passwordInputIcon.children[0].classList.toggle("bi-eye-fill");
+  const passInputType = passwordInput.getAttribute("type");
+  passInputType === "password"
+    ? passwordInput.setAttribute("type", "text")
+    : passwordInput.setAttribute("type", "password");
+});
+
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (validateForm()) {
+    // space for going to the next step, or sending some requests
+    /*
+
+
+
+
+    */
+  }
+});
